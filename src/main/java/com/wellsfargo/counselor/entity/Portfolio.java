@@ -1,9 +1,6 @@
 package com.wellsfargo.counselor.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -13,8 +10,8 @@ public class Portfolio {
     @GeneratedValue()
     private long portfolioId;
 
-    @Column(nullable = false)
-    private long clientId;
+    @ManyToOne
+    private Client client;
 
     @Column(nullable = false)
     private Date creationDate;
@@ -24,8 +21,8 @@ public class Portfolio {
 
     }
 
-    public Portfolio(long clientId, long portfolioId, Date creationDate) {
-        this.clientId = clientId;
+    public Portfolio(Client client, long portfolioId, Date creationDate) {
+        this.client = client;
         this.portfolioId = portfolioId;
         this.creationDate = creationDate;
 
@@ -36,8 +33,8 @@ public class Portfolio {
     }
 
 
-    public long getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
     public Date getCreationDate() {
